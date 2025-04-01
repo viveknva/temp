@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&family=Inter:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-quicksand antialiased bg-background text-foreground overflow-hidden;
+    min-height: 100vh;
+    touch-action: manipulation;
+  }
+
+  :root {
+    --gradient-bg: linear-gradient(135deg, hsl(215 24% 18%) 0%, hsl(215 24% 24%) 100%);
+  }
+}
+
+@layer components {
+  .breathing-circle {
+    box-shadow: 0 0 100px rgba(74, 198, 183, 0.5);
+    transition: all 0.5s ease;
+  }
+  
+  .gradient-bg {
+    background: var(--gradient-bg);
+  }
+  
+  .blur-circle {
+    filter: blur(70px);
+  }
+  
+  .backdrop-blur {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  .progress-ring__circle {
+    transform-origin: center;
+    transform: rotate(-90deg);
+    transition: stroke-dashoffset 0.5s ease;
+  }
+}
+
+@layer utilities {
+  @keyframes breatheIn {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.5); opacity: 1; }
+  }
+  
+  @keyframes breatheHold {
+    0% { transform: scale(1.5); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 1; }
+  }
+  
+  @keyframes breatheOut {
+    0% { transform: scale(1.5); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  .animate-breatheIn {
+    animation: breatheIn var(--duration) ease-in-out forwards;
+  }
+  
+  .animate-breatheHold {
+    animation: breatheHold var(--duration) ease-in-out forwards;
+  }
+  
+  .animate-breatheOut {
+    animation: breatheOut var(--duration) ease-in-out forwards;
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  
+  .animate-fadeOut {
+    animation: fadeOut 0.5s ease-in-out forwards;
+  }
+}
