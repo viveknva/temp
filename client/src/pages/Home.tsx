@@ -25,9 +25,19 @@ const Home: FC = () => {
   });
 
   // Get the current pattern, either from API or default
-  const selectedPattern = exercises.find(e => e.id === selectedPatternId) || 
-    defaultBreathingPatterns[selectedPatternId] || 
-    defaultBreathingPatterns["box-breathing"];
+  const selectedExercise = exercises.find(e => e.id === selectedPatternId);
+  
+  // Convert Exercise from API to BreathingPattern if needed
+  const selectedPattern = selectedExercise ? {
+    id: selectedExercise.id,
+    name: selectedExercise.name,
+    description: selectedExercise.description,
+    colorTheme: selectedExercise.colorTheme,
+    inhale: selectedExercise.steps.inhale,
+    hold1: selectedExercise.steps.hold1,
+    exhale: selectedExercise.steps.exhale,
+    hold2: selectedExercise.steps.hold2
+  } : defaultBreathingPatterns[selectedPatternId] || defaultBreathingPatterns["box-breathing"];
 
   // Handle welcome screen exit
   const handleWelcomeClose = () => {
@@ -56,22 +66,22 @@ const Home: FC = () => {
   };
 
   return (
-    <div className="font-quicksand gradient-bg text-light min-h-screen">
+    <div className="font-quicksand bg-slate-900 text-white min-h-screen flex flex-col">
       {/* Background decorative elements */}
-      <div className="fixed inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/4 w-96 h-96 rounded-full bg-primary opacity-10 blur-circle"></div>
-        <div className="absolute bottom-1/4 right-1/3 w-80 h-80 rounded-full bg-secondary opacity-10 blur-circle"></div>
-        <div className="absolute top-1/3 right-1/4 w-64 h-64 rounded-full bg-accent opacity-5 blur-circle"></div>
+      <div className="fixed inset-0 overflow-hidden z-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/4 w-72 h-72 rounded-full bg-primary/20 opacity-30 blur-circle"></div>
+        <div className="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full bg-cyan-500/20 opacity-30 blur-circle"></div>
+        <div className="absolute top-1/3 right-1/4 w-56 h-56 rounded-full bg-purple-500/20 opacity-20 blur-circle"></div>
       </div>
 
       {/* Welcome overlay */}
       {showWelcome && <WelcomeOverlay onGetStarted={handleWelcomeClose} />}
 
       {/* Main content */}
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col flex-grow">
         <Header onSettingsClick={handleSettingsClick} />
 
-        <main className="relative z-10 pt-4 px-4 flex flex-col items-center">
+        <main className="flex-grow flex flex-col items-center justify-center px-4 pb-10">
           <BreathingExercise
             selectedPattern={selectedPattern}
             sessionDuration={sessionDuration}

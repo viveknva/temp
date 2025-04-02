@@ -6,7 +6,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ onSettingsClick }) => {
   return (
-    <header className="relative z-10 pt-6 px-6 flex justify-between items-center">
+    <header className="relative z-10 py-4 px-6 flex justify-between items-center">
       <div className="flex items-center">
         <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
           <svg
@@ -35,7 +35,8 @@ const Header: FC<HeaderProps> = ({ onSettingsClick }) => {
 
       <button
         onClick={onSettingsClick}
-        className="w-10 h-10 rounded-full bg-dark/50 backdrop-blur flex items-center justify-center hover:bg-dark/70 transition-colors"
+        className="w-10 h-10 rounded-full bg-slate-800/80 flex items-center justify-center hover:bg-slate-700/80 transition-colors"
+        aria-label="Settings"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

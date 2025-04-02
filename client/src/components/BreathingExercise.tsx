@@ -47,31 +47,34 @@ const BreathingExercise: FC<BreathingExerciseProps> = ({
   };
 
   return (
-    <div className="relative w-full flex flex-col items-center justify-center min-h-[70vh]">
+    <div className="flex flex-col items-center justify-between h-full w-full max-w-xl mx-auto">
       {/* Phase instruction */}
-      <div className="absolute top-14 md:top-20 text-center font-light text-xl md:text-2xl z-20 transition-all">
-        <span>{phaseLabel}</span>
-        <div className="mt-2 flex justify-center">
+      <div className="text-center mb-8 pt-6">
+        <div className="text-xl md:text-2xl font-light">{phaseLabel}</div>
+        <div className="mt-1">
           <span className="text-sm opacity-70">{phaseDuration}s</span>
         </div>
       </div>
 
       {/* Breathing visualization */}
-      <BreathingCircle phase={phase} duration={phaseDuration} isPlaying={isPlaying} />
+      <div className="flex items-center justify-center flex-grow">
+        <BreathingCircle phase={phase} duration={phaseDuration} isPlaying={isPlaying} />
+      </div>
 
       {/* Session controls */}
-      <div className="absolute bottom-0 w-full max-w-sm flex flex-col items-center pb-6">
+      <div className="w-full max-w-sm flex flex-col items-center mt-10 mb-6">
         {/* Time remaining */}
         <div className="text-center mb-6">
           <span className="text-3xl font-light">{formatTime(timeRemaining)}</span>
-          <p className="text-xs text-light/70 mt-1">Time remaining</p>
+          <p className="text-xs opacity-70 mt-1">Time remaining</p>
         </div>
 
         {/* Controls */}
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-6 items-center">
           <button
             onClick={resetExercise}
-            className="w-12 h-12 rounded-full bg-dark/50 backdrop-blur flex items-center justify-center hover:bg-dark/70 transition-colors"
+            className="w-12 h-12 rounded-full bg-slate-800/80 flex items-center justify-center hover:bg-slate-700/80 transition-colors"
+            aria-label="Reset"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +95,7 @@ const BreathingExercise: FC<BreathingExerciseProps> = ({
           <button
             onClick={togglePlayPause}
             className="w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center hover:bg-primary transition-colors"
+            aria-label={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? (
               <svg
@@ -134,7 +138,8 @@ const BreathingExercise: FC<BreathingExerciseProps> = ({
 
           <button
             onClick={toggleFullscreen}
-            className="w-12 h-12 rounded-full bg-dark/50 backdrop-blur flex items-center justify-center hover:bg-dark/70 transition-colors"
+            className="w-12 h-12 rounded-full bg-slate-800/80 flex items-center justify-center hover:bg-slate-700/80 transition-colors"
+            aria-label="Toggle fullscreen"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -145,7 +145,7 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 bg-dark/90 backdrop-blur transform transition-transform duration-300 ease-in-out z-20 rounded-t-3xl ${
+      className={`fixed bottom-0 left-0 right-0 bg-slate-800/95 backdrop-blur transform transition-transform duration-300 ease-in-out z-20 rounded-t-3xl shadow-lg ${
         isOpen ? "translate-y-0" : "translate-y-full"
       }`}
     >
@@ -154,7 +154,8 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
           <h2 className="text-xl font-medium">Breathing Exercises</h2>
           <button
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-dark/50"
+            className="p-2 rounded-full hover:bg-slate-700/50"
+            aria-label="Close selector"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -173,23 +174,23 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto pb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[40vh] overflow-y-auto pb-4">
           {exercises.map((exercise) => (
             <div
               key={exercise.id}
-              className={`exercise-card p-4 bg-dark/50 rounded-xl border ${
+              className={`exercise-card p-4 bg-slate-700/40 rounded-xl border ${
                 selectedPattern === exercise.id
                   ? "border-primary/50"
-                  : "border-light/10"
+                  : "border-slate-600/30"
               } cursor-pointer hover:border-primary/30 transition-all`}
               onClick={() => onPatternChange(exercise.id)}
             >
               <div className="flex justify-between items-start mb-3">
                 <div>
                   <h3 className="font-medium">{exercise.name}</h3>
-                  <p className="text-sm text-light/70">{exercise.description}</p>
+                  <p className="text-sm text-white/70">{exercise.description}</p>
                 </div>
-                <div className={`bg-${exercise.colorTheme}/20 rounded-full h-8 w-8 flex items-center justify-center`}>
+                <div className="bg-slate-600/20 rounded-full h-8 w-8 flex items-center justify-center">
                   {renderExerciseIcon(exercise.id)}
                 </div>
               </div>
@@ -199,22 +200,22 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
         </div>
 
         {/* Settings section */}
-        <div className="mt-6 pt-4 border-t border-light/10">
+        <div className="mt-6 pt-4 border-t border-slate-600/30">
           <h3 className="text-lg font-medium mb-4">Settings</h3>
 
           {/* Duration selection */}
           <div className="mb-4">
-            <label className="text-sm text-light/70 block mb-2">
+            <label className="text-sm text-white/70 block mb-2">
               Session Duration
             </label>
-            <div className="flex space-x-2">
+            <div className="flex flex-wrap gap-2">
               {[3, 5, 10, 15].map((duration) => (
                 <button
                   key={duration}
-                  className={`duration-btn px-4 py-2 rounded-lg bg-dark/50 border ${
+                  className={`duration-btn px-4 py-2 rounded-lg bg-slate-700/40 border ${
                     sessionDuration === duration
                       ? "border-primary/50"
-                      : "border-light/10"
+                      : "border-slate-600/30"
                   } text-sm hover:border-primary/30`}
                   onClick={() => onDurationChange(duration)}
                 >
@@ -227,7 +228,7 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
           {/* Audio settings */}
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
-              <label className="text-sm text-light/70">Guidance Audio</label>
+              <label className="text-sm text-white/70">Guidance Audio</label>
               <Switch
                 checked={isAudioEnabled}
                 onCheckedChange={onAudioEnabledChange}
@@ -236,7 +237,7 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
             <div className="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-light/50"
+                className="h-5 w-5 text-white/50"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -250,7 +251,7 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
               </svg>
               <input
                 type="range"
-                className="w-full h-1 mx-3 bg-dark/70 rounded appearance-none cursor-pointer"
+                className="w-full h-1 mx-3 bg-slate-700/70 rounded appearance-none cursor-pointer"
                 min="0"
                 max="100"
                 value={localVolume}
@@ -258,7 +259,7 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-light/50"
+                className="h-5 w-5 text-white/50"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -275,17 +276,17 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
 
           {/* Background sounds */}
           <div>
-            <label className="text-sm text-light/70 block mb-2">
+            <label className="text-sm text-white/70 block mb-2">
               Background Sounds
             </label>
             <div className="grid grid-cols-3 gap-2">
               {["none", "ocean", "forest"].map((sound) => (
                 <button
                   key={sound}
-                  className={`sound-btn px-3 py-2 rounded-lg bg-dark/50 border ${
+                  className={`sound-btn px-3 py-2 rounded-lg bg-slate-700/40 border ${
                     selectedSound === sound
                       ? "border-primary/50"
-                      : "border-light/10"
+                      : "border-slate-600/30"
                   } text-sm hover:border-primary/30 flex flex-col items-center`}
                   onClick={() => onSoundChange(sound)}
                 >
@@ -349,7 +350,7 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
 
           <button
             onClick={onStart}
-            className="w-full mt-6 py-3 bg-primary rounded-xl font-medium hover:bg-primary/90 transition-colors"
+            className="w-full mt-6 py-3 bg-primary/80 hover:bg-primary rounded-xl font-medium transition-colors"
           >
             Start Breathing
           </button>
