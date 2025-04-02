@@ -60,6 +60,11 @@ const Home: FC = () => {
     setShowSelector(false);
   };
 
+  // Handle back to welcome screen
+  const handleBackToWelcome = () => {
+    setShowWelcome(true);
+  };
+
   // Handle exercise reset
   const handleReset = () => {
     // No additional logic needed here yet
@@ -78,21 +83,26 @@ const Home: FC = () => {
       {showWelcome && <WelcomeOverlay onGetStarted={handleWelcomeClose} />}
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-col flex-grow">
-        <Header onSettingsClick={handleSettingsClick} />
-
-        <main className="flex-grow flex flex-col items-center justify-center px-4 pb-10">
-          <BreathingExercise
-            selectedPattern={selectedPattern}
-            sessionDuration={sessionDuration}
-            isAudioEnabled={isAudioEnabled}
-            selectedSound={selectedSound}
-            volume={volume}
-            onReset={handleReset}
-            onChangeSettingsClick={handleSettingsClick}
+      {!showWelcome && (
+        <div className="relative z-10 flex flex-col flex-grow">
+          <Header 
+            onSettingsClick={handleSettingsClick} 
+            onBackToMenuClick={handleBackToWelcome}
           />
-        </main>
-      </div>
+
+          <main className="flex-grow flex flex-col items-center justify-center px-4 pb-10">
+            <BreathingExercise
+              selectedPattern={selectedPattern}
+              sessionDuration={sessionDuration}
+              isAudioEnabled={isAudioEnabled}
+              selectedSound={selectedSound}
+              volume={volume}
+              onReset={handleReset}
+              onChangeSettingsClick={handleSettingsClick}
+            />
+          </main>
+        </div>
+      )}
 
       {/* Exercise selector panel */}
       <ExerciseSelector
